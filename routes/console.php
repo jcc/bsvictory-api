@@ -15,5 +15,4 @@ Schedule::command(UpdateBidding::class)
 
 Schedule::command(UpdateSeconds::class)
     ->everyFiveSeconds()
-    ->between('09:30', '11:30')
-    ->between('13:00', '15:00');
+    ->between('09:30', '15:00');
