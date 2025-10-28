@@ -12,7 +12,7 @@ class StockController extends Controller
     {
         $date = $request->get('date');
 
-        $stocks = Stock::whereDate('created_at', $date)->groupBy('code')->get();
+        $stocks = Stock::whereDate('created_at', $date)->get();
 
         return $stocks;
     }
