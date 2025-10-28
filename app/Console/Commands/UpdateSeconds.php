@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Raw;
 use App\Models\Stock;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class UpdateSeconds extends Command
@@ -27,6 +28,14 @@ class UpdateSeconds extends Command
      */
     public function handle()
     {
+        $now = Carbon::now();
+        $time1 = Carbon::today()->setTime(11, 30);
+        $time2 = Carbon::today()->setTime(13, 00);
+
+        if ($now->gt($time1) && $now->lt($time2)) {
+            return 0;
+        }
+
         $record = Raw::whereDate('created_at', today())->first();
 
         return $this->saveStocks($record->data);
