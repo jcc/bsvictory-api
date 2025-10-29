@@ -61,7 +61,7 @@ class UpdateYesterday extends Command
         $machineNums = [];
 
         if (empty($items)) {
-            return false;
+            return 0;
         }
 
         foreach ($items as $key => $machine) {
@@ -78,7 +78,7 @@ class UpdateYesterday extends Command
         }
 
         if (empty($codes)) {
-            return false;
+            return 0;
         }
 
         $response = make_request('http://qt.gtimg.cn/q=' . implode(',', $codes));
@@ -104,6 +104,6 @@ class UpdateYesterday extends Command
             }
         }
 
-        return true;
+        return 0;
     }
 }

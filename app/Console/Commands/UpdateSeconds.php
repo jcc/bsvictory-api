@@ -51,8 +51,7 @@ class UpdateSeconds extends Command
         $machineNums = [];
 
         if (empty($items)) {
-            print('empty');
-            return false;
+            return 0;
         }
 
         foreach ($items as $key => $machine) {
@@ -69,8 +68,7 @@ class UpdateSeconds extends Command
         }
 
         if (empty($codes)) {
-            print('empty');
-            return false;
+            return 0;
         }
 
         $response = make_request('http://qt.gtimg.cn/q=' . implode(',', $codes));
@@ -110,6 +108,6 @@ class UpdateSeconds extends Command
             }
         }
 
-        return true;
+        return 0;
     }
 }

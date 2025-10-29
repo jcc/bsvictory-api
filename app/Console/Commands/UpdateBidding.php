@@ -65,7 +65,7 @@ class UpdateBidding extends Command
         $machineNums = [];
 
         if (empty($items)) {
-            return $data;
+            return 0;
         }
 
         foreach ($items as $key => $machine) {
@@ -82,7 +82,7 @@ class UpdateBidding extends Command
         }
 
         if (empty($codes)) {
-            return $data;
+            return 0;
         }
 
         $response = make_request('http://qt.gtimg.cn/q=' . implode(',', $codes));
@@ -128,6 +128,6 @@ class UpdateBidding extends Command
             Stock::insert($stocks);
         }
 
-        return true;
+        return 0;
     }
 }
