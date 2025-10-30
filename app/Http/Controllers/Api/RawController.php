@@ -81,6 +81,7 @@ class RawController extends Controller
 
         foreach ($stocks as $key => $stock) {
             $stocks[$key]['model'] = $machineNums[$key];
+            $stocks[$key]['open_turnover'] = $stock['turnover'];
             $stocks[$key]['created_at'] = now();
             $stocks[$key]['updated_at'] = now();
         }
@@ -107,6 +108,9 @@ class RawController extends Controller
                 $target->highest_price = $stock['highest_price'];
                 $target->lowest_price = $stock['lowest_price'];
                 $target->turnover = $stock['turnover'];
+                if (empty($target->open_turnover)) {
+                    $target->open_turnover = $stock['turnover'];
+                }
                 $target->amplitude = $stock['amplitude'];
                 $target->save();
             }

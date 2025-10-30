@@ -53,6 +53,7 @@ class CreateStocksTable extends Migration
             $table->float('highest_price')->comment('最高')->nullable();
             $table->float('lowest_price')->comment('最低')->nullable();
             $table->string('turnover')->comment('换手率')->nullable();
+            $table->string('open_turnover')->comment('开盘换手率')->nullable();
             $table->string('pe_ratio')->comment('市盈率')->nullable();
             $table->string('amplitude')->comment('振幅')->nullable();
             $table->string('total_market_value')->comment('总市值')->nullable();
