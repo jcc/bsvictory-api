@@ -16,4 +16,31 @@ class StockController extends Controller
 
         return $stocks;
     }
+
+    public function updateStockById(Request $request)
+    {
+        $stockId = $request->get('id');
+        $remark = $request->get('remark', null);
+        $canBuy = $request->get('can_buy', null);
+
+        if (empty($stockId)) {
+            return response()->json([
+                'message' => '参数错误',
+            ]);
+        }
+
+        $stock = Stock::find('id', $stockId);
+
+        if (isset($stock)) {
+            return response()->json([
+                'message' => '记录不存在',
+            ]);
+        }
+
+        $stock->remark = $remark;
+        $stock->can_buy = $canBuy;
+        $res = $stock->save();
+
+        return $res;
+    }
 }

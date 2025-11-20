@@ -58,6 +58,8 @@ class CreateStocksTable extends Migration
             $table->string('amplitude')->comment('振幅')->nullable();
             $table->string('total_market_value')->comment('总市值')->nullable();
             $table->string('circulating_market_value')->comment('流通市值')->nullable();
+            $table->tinyIncrements('can_buy')->comment('是否下单买入')->nullable();
+            $table->text('remark')->comment('备注')->nullable();
             $table->timestamps();
         });
     }
