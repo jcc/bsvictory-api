@@ -31,7 +31,7 @@ class StockController extends Controller
 
         $stock = Stock::find($stockId);
 
-        if (isset($stock)) {
+        if (!isset($stock)) {
             return response()->json([
                 'message' => '记录不存在',
             ]);
