@@ -29,7 +29,7 @@ class StockController extends Controller
             ]);
         }
 
-        $stock = Stock::find('id', $stockId);
+        $stock = Stock::find($stockId);
 
         if (isset($stock)) {
             return response()->json([
