@@ -104,6 +104,7 @@ class UpdateSeconds extends Command
 
                 $target = $oldStocks->where('code', $stock['code'])->where('model', $stock['model'])->first();
 
+                $target->name = $stock['name'];
                 $target->profit = $profit;
                 $target->current_price = $stock['current_price'];
                 $target->current_price = $stock['current_price'];

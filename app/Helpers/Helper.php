@@ -37,7 +37,7 @@ if (!function_exists('parse_response')) {
         $lines = explode(';', $response);
         $result = [];
 
-        foreach ($lines as $line) {
+        foreach ($lines as $key => $line) {
             if (!strpos($line, '=')) continue;
 
             $parsedData = parse_single_stock($line);
@@ -58,7 +58,7 @@ if (!function_exists('parse_single_stock')) {
         $stock = explode('~', explode('"', $line)[1]);
 
         return [
-            'name' => iconv('GB2312', 'UTF-8', $stock[1]), // 名字
+            'name' => mb_convert_encoding($stock[1], 'UTF-8', 'GBK'), // 名字
             'code' => $stock[2], // 代码
             'current_price' => $stock[3], // 当前价格
             'yesterday_close' => $stock[4], // 昨收
