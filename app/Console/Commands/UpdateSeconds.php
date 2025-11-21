@@ -40,6 +40,7 @@ class UpdateSeconds extends Command
 
         return $this->saveStocks($record->data);
     }
+
     /**
      * 更新数据
      */
@@ -60,9 +61,9 @@ class UpdateSeconds extends Command
             if (!empty($machineCodes)) {
                 foreach ($machineCodes as $machineCode) {
                     $machineNums[] = $key;
-                    $items = explode('.', $machineCode);
+                    $parts = explode('.', $machineCode);
 
-                    $codes[] = strtolower($items[1]) . $items[0];
+                    $codes[] = strtolower($parts[1]) . $parts[0];
                 }
             }
         }
@@ -71,15 +72,27 @@ class UpdateSeconds extends Command
             return 0;
         }
 
-        $response = make_request('http://qt.gtimg.cn/q=' . implode(',', $codes));
+        // Split into chunks of 5 to avoid too many codes in one request
+        $codeChunks = array_chunk($codes, 5);
+        $machineChunks = array_chunk($machineNums, 5);
 
-        $stocks = parse_response($response);
+        $allStocks = [];
 
-        foreach ($stocks as $key => $stock) {
-            $stocks[$key]['model'] = $machineNums[$key];
-            $stocks[$key]['created_at'] = now();
-            $stocks[$key]['updated_at'] = now();
+        foreach ($codeChunks as $i => $chunk) {
+            $response = make_request('http://qt.gtimg.cn/q=' . implode(',', $chunk));
+
+            $parsed = parse_response($response);
+
+            // Add model and timestamps, keep order aligned with machineChunks
+            foreach (array_values($parsed) as $k => $stock) {
+                $stock['model'] = $machineChunks[$i][$k];
+                $stock['created_at'] = now();
+                $stock['updated_at'] = now();
+                $allStocks[] = $stock;
+            }
         }
+
+        $stocks = $allStocks;
 
         $todayNum = Stock::whereDate('created_at', today())->count();
 
