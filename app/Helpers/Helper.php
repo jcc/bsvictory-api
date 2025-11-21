@@ -58,7 +58,8 @@ if (!function_exists('parse_single_stock')) {
         $stock = explode('~', explode('"', $line)[1]);
 
         return [
-            'name' => iconv('GB2312', 'UTF-8', $stock[1]), // 名字
+            // 'name' => iconv('GB2312', 'UTF-8', $stock[1]), // 名字
+            'name' => $stock[1],
             'code' => $stock[2], // 代码
             'current_price' => $stock[3], // 当前价格
             'yesterday_close' => $stock[4], // 昨收
