@@ -8,3 +8,4 @@ Route::get('/raw', 'RawController@getRaw');
 Route::get('/stocks', 'StockController@getStocks');
 
 Route::post('/update-stock', 'StockController@updateStockById');
+Route::get('/daily-profit', 'DailyController@getDaily');
