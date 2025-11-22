@@ -27,7 +27,7 @@ class UpdateIncAndDecNum extends Command
      */
     public function handle()
     {
-        $date = Carbon::now()->subDay()->format('Y-m-d');
+        $date = Carbon::now()->format('Y-m-d');
 
         $response = make_request('https://push2.eastmoney.com/api/qt/ulist/get?fltt=1&invt=2&fields=f104%2Cf105%2Cf106&secids=1.000002%2C0.399002%2C0.899050&ut=8dec03ba335b81bf4ebdf7b29ec27d15&pn=1&np=1&dect=1&pz=20&_=1763519937379');
 
