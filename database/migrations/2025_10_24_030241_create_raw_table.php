@@ -15,8 +15,8 @@ class CreateRawTable extends Migration
     {
         Schema::create('raw', function (Blueprint $table) {
             $table->id();
-            $table->string('ip');
-            $table->json('data');
+            $table->string('ip')->nullable();
+            $table->json('data')->nullable();
             $table->timestamps();
         });
     }
