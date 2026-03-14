@@ -8,7 +8,7 @@ use App\Models\StockSnapshot;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class StockController extends Controller
+class StockDataController extends Controller
 {
     /**
      * 获取今日推荐股票
