@@ -18,8 +18,9 @@ class StockDataController extends Controller
     {
         $type = $request->get('type', 'afternoon');
         $limit = $request->get('limit', 20);
+        $date = $request->get('date', Carbon::now()->toDateString());
 
-        $recommendations = StockRecommendation::where('recommend_date', Carbon::now()->toDateString())
+        $recommendations = StockRecommendation::where('recommend_date', $date)
             ->where('recommend_type', $type)
             ->orderBy('stock_rank')
             ->limit($limit)
@@ -28,7 +29,7 @@ class StockDataController extends Controller
         return response()->json([
             'success' => true,
             'data' => $recommendations,
-            'date' => Carbon::now()->toDateString(),
+            'date' => $date,
             'type' => $type,
         ]);
     }
